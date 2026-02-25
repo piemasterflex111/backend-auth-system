@@ -1,14 +1,26 @@
 # Backend Auth System
 
-Minimal FastAPI backend service.
+Minimal production-style FastAPI backend.
+
+## Stack
+
+- Python 3.x
+- FastAPI
+- Uvicorn
+- Virtual Environment
+- Git Versioned
 
 ## Endpoints
 
-- GET / → service running
-- GET /health → health check
+GET / → Service running  
+GET /health → Health check  
 
-## Run locally
+## Run Locally
 
-1. Create virtual environment
-2. pip install -r requirements.txt
-3. uvicorn app.main:app --reload
+```bash
+python -m venv venv
+venv\Scripts\Activate.ps1
+pip install -r requirements.txt
+uvicorn app.main:app --reload
+
+
