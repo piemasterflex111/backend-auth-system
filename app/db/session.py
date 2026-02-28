@@ -11,4 +11,3 @@ SessionLocal = sessionmaker(
     bind=engine
 )
 
-db = SessionLocal()

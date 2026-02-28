@@ -1,11 +1,12 @@
 from app.db.session import SessionLocal
 from app.models.user import User
 from app.security import get_password_hash
+import uuid
 
 db = SessionLocal()
 
 new_user = User(
-    email="payamistestinguserobject_2-27-26@gmail.com",
+    email = f"test_{uuid.uuid4()}@example.com",
     hashed_password=get_password_hash("test123"),
 )
 
