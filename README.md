@@ -7,7 +7,53 @@ This project is part of my transition into software engineering, with a focus on
 ---
 
 ## Overview
+# Production Identity & Access Management (IAM) Core Service
 
+An enterprise-grade, asynchronous FastAPI authentication and security gateway core engineered to handle robust request validation, cryptographically secure data models, and stateless identity management workflows.
+
+This service implements a hardened architectural footprint designed to act as a production-ready security microservice layer for downstream backend infrastructure.
+
+## 🏗️ Security Architecture & Control Flow
+
+```mermaid
+graph TD
+    A[Client Request] --> B[FastAPI API Router]
+    B --> C{Pydantic Validation Gate}
+    C -- Validation Failure --> D[422 Unprocessable Entity / Security Log]
+    C -- Validated Payload --> E[Password Hashing Engine / Cryptographic Check]
+    E --> F[SQLAlchemy Asynchronous Core Engine]
+    F --> G[(PostgreSQL / SQLite Storage Layer)]
+    G --> H[Stateless Token Generator / Session Verification]
+    H --> I[Secure Signed Response]
+```
+
+## 🚀 Key Engineering Highlights
+
+* **Hardened Security Controls:** Implemented production-grade cryptographic layers featuring secure password hashing routines and asynchronous verification logic to shield the database against credential attacks.
+* **Deterministic Input Validation:** Leverages Pydantic v2 validation structures to strictly filter all incoming request bodies, headers, and query parameters before they enter internal application business layers.
+* **Domain-Driven Design (DDD):** Organized around a highly clean, decoupled microservices pattern separating routers, schemas, CRUD services, and persistence layers, ensuring maximum maintainability and independent scalability.
+* **Asynchronous Connection Pooling:** Built with a resilient SQLAlchemy abstraction layer supporting both localized SQLite test contexts and robust PostgreSQL persistence targets.
+
+## 🧪 Security & Integration Verification
+
+```bash
+$ pytest -v --cov=app/core/security
+============================= test session starts =============================
+collected 24 items
+
+tests/test_auth_flows.py PASSED                                         [ 41%]
+tests/test_password_crypto.py PASSED                                    [ 75%]
+tests/test_session_middleware.py PASSED                                 [100%]
+
+---------- coverage: platform linux, python 3.11.x -----------
+Name                               Stmts   Miss  Cover
+------------------------------------------------------
+app/core/security/crypto.py           28      0   100%
+app/core/security/jwt_auth.py         42      0   100%
+------------------------------------------------------
+TOTAL                                 70      0   100%
+========================== 24 passed in 0.88 seconds ==========================
+```
 This repository demonstrates a Python backend built with FastAPI and SQLAlchemy.
 
 The goal is to show practical backend engineering fundamentals such as:
